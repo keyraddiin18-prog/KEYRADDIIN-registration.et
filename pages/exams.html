@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KEYRADDIIN EXAM CATALOG</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="brand">
+
+        <h1>
+            KEYRADDIIN MEDIA
+        </h1>
+
+        <p>
+            EXAM CATALOG
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <a
+        href="../index.html"
+        class="back-link"
+    >
+        ← Back to Home
+    </a>
+
+
+
+    <div class="page-title">
+
+        <h2>
+            Available Exams
+        </h2>
+
+        <p>
+            Choose the specific exam you want to access.
+        </p>
+
+    </div>
+
+
+
+    <section
+        id="studentInfo"
+        class="info-box"
+        style="margin-bottom:20px;"
+    >
+
+        Loading student information...
+
+    </section>
+
+
+
+    <section
+        id="examList"
+        class="exam-grid"
+    >
+
+    </section>
+
+
+</main>
+
+
+
+<script src="../data/exams.js"></script>
+
+
+<script>
+
+/* =====================================================
+   GET STUDENT INFORMATION
+===================================================== */
+
+const student =
+    JSON.parse(
+        localStorage.getItem("keyraddiinStudent")
+    );
+
+
+const examList =
+    document.getElementById("examList");
+
+
+const studentInfo =
+    document.getElementById("studentInfo");
+
+
+
+/* =====================================================
+   CHECK STUDENT
+===================================================== */
+
+if (!student) {
+
+    studentInfo.innerHTML = `
+
+        <h3>
+            Student Registration Required
+        </h3>
+
+        <p>
+            Please register before selecting an exam.
+        </p>
+
+        <a
+            href="register.html"
+            class="btn primary"
+        >
+            REGISTER NOW
+        </a>
+
+    `;
+
+} else {
+
+    studentInfo.innerHTML = `
+
+        <h3>
+            Student Information
+        </h3>
+
+        <p>
+            <strong>Name:</strong>
+            ${student.fullName}
+        </p>
+
+        <p>
+            <strong>Grade:</strong>
+            ${student.grade}
+        </p>
+
+        <p>
+            <strong>School:</strong>
+            ${student.school}
+        </p>
+
+        <p>
+            <strong>Section:</strong>
+            ${student.section}
+        </p>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   SHOW EXAMS
+===================================================== */
+
+function showExams() {
+
+    examList.innerHTML = "";
+
+
+    if (!student) {
+
+        return;
+
+    }
+
+
+    exams.forEach(function (exam) {
+
+
+        /*
+            ONLY SHOW STUDENT'S GRADE
+        */
+
+        if (
+            String(exam.grade) !==
+            String(student.grade)
+        ) {
+
+            return;
+
+        }
+
+
+
+        /*
+            CREATE CARD
+        */
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "exam-card";
+
+
+
+        /*
+            PRICE
+        */
+
+        const isFree =
+            Number(exam.price) === 0;
+
+
+
+        /*
+            CARD HTML
+        */
+
+        card.innerHTML = `
+
+            <h3>
+                ${exam.title}
+            </h3>
+
+
+            <div class="exam-meta">
+
+                <p>
+                    <strong>Exam Code:</strong>
+                    ${exam.examCode}
+                </p>
+
+                <p>
+                    <strong>Grade:</strong>
+                    ${exam.grade}
+                </p>
+
+                <p>
+                    <strong>Subject:</strong>
+                    ${exam.subject}
+                </p>
+
+                <p>
+                    <strong>Unit:</strong>
+                    ${exam.unit}
+                </p>
+
+            </div>
+
+
+            <div class="price ${
+                isFree ? "free" : "paid"
+            }">
+
+                ${
+                    isFree
+                    ? "FREE"
+                    : "Price: " + exam.price + " Birr"
+                }
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn primary full-btn"
+                data-exam-code="${exam.examCode}"
+            >
+
+                ${
+                    isFree
+                    ? "GET FREE ACCESS"
+                    : "SELECT & PAY"
+                }
+
+            </button>
+
+        `;
+
+
+
+        /*
+            GET BUTTON
+        */
+
+        const button =
+            card.querySelector("button");
+
+
+
+        /*
+            BUTTON CLICK
+        */
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                selectExam(
+                    exam.examCode
+                );
+
+            }
+        );
+
+
+
+        /*
+            ADD CARD
+        */
+
+        examList.appendChild(card);
+
+    });
+
+
+
+    /*
+        NO EXAMS
+    */
+
+    if (
+        examList.children.length === 0
+    ) {
+
+        examList.innerHTML = `
+
+            <div class="info-box">
+
+                <h3>
+                    No Exams Available
+                </h3>
+
+                <p>
+                    There are currently no exams
+                    available for your grade.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SELECT EXAM
+===================================================== */
+
+function selectExam(examCode) {
+
+
+    console.log(
+        "Exam clicked:",
+        examCode
+    );
+
+
+
+    /*
+        FIND EXAM
+    */
+
+    const selectedExam =
+        exams.find(
+            function (exam) {
+
+                return (
+                    exam.examCode === examCode
+                );
+
+            }
+        );
+
+
+
+    /*
+        EXAM NOT FOUND
+    */
+
+    if (!selectedExam) {
+
+        alert(
+            "Exam not found."
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+        MAKE SURE THIS EXAM
+        BELONGS TO STUDENT GRADE
+    */
+
+    if (
+        String(selectedExam.grade) !==
+        String(student.grade)
+    ) {
+
+        alert(
+            "This exam is not available for your grade."
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+        REMOVE OLD SELECTED EXAM
+    */
+
+    localStorage.removeItem(
+        "selectedExam"
+    );
+
+
+
+    /*
+        SAVE NEW SELECTED EXAM
+    */
+
+    localStorage.setItem(
+        "selectedExam",
+        JSON.stringify(selectedExam)
+    );
+
+
+
+    /*
+        VERIFY
+    */
+
+    const savedExam =
+        JSON.parse(
+            localStorage.getItem(
+                "selectedExam"
+            )
+        );
+
+
+
+    console.log(
+        "Selected exam:",
+        savedExam
+    );
+
+
+
+    /*
+        IF SAVE FAILED
+    */
+
+    if (
+        !savedExam ||
+        savedExam.examCode !==
+        selectedExam.examCode
+    ) {
+
+        alert(
+            "Exam selection failed. Please try again."
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+        FREE EXAM
+    */
+
+    if (
+        Number(selectedExam.price) === 0
+    ) {
+
+        window.location.href =
+            "confirmation.html";
+
+        return;
+
+    }
+
+
+
+    /*
+        PAID EXAM
+    */
+
+    window.location.href =
+        "payment.html";
+
+}
+
+
+
+/* =====================================================
+   START PAGE
+===================================================== */
+
+showExams();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="brand">
+        <h1>KEYRADDIIN</h1>
+        <p>STUDENT REGISTRATION</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <a href="../index.html" class="back-link">
+        ← Back to Home
+    </a>
+
+    <div class="page-title">
+        <h2>Student Registration</h2>
+        <p>Enter your information correctly.</p>
+    </div>
+
+    <section class="form-card">
+
+        <form id="registrationForm">
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="grade">Grade</label>
+
+                <select id="grade" required>
+                    <option value="">Select Grade</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="school">School Name</label>
+
+                <input
+                    type="text"
+                    id="school"
+                    placeholder="Enter school name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="section">Section</label>
+
+                <input
+                    type="text"
+                    id="section"
+                    placeholder="Example: 9A"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="telegram">Telegram Username / ID</label>
+
+                <input
+                    type="text"
+                    id="telegram"
+                    placeholder="@username or Telegram ID"
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="btn primary full-btn"
+            >
+                CONTINUE TO EXAMS
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+<script>
+
+document
+    .getElementById("registrationForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const student = {
+            fullName: document.getElementById("fullName").value.trim(),
+            grade: document.getElementById("grade").value,
+            school: document.getElementById("school").value.trim(),
+            section: document.getElementById("section").value.trim(),
+            telegram: document.getElementById("telegram").value.trim()
+        };
+
+        localStorage.setItem(
+            "keyraddiinStudent",
+            JSON.stringify(student)
+        );
+
+        window.location.href = "exams.html";
+
+    });
+
+</script>
+
+</body>
+</html>

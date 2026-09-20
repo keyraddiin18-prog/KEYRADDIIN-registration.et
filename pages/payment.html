@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KEYRADDIIN Exam Payment</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="brand">
+
+        <h1>
+            KEYRADDIIN
+        </h1>
+
+        <p>
+            EXAM PAYMENT
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <!-- BACK -->
+
+    <a
+        href="exams.html"
+        style="
+            display:inline-block;
+            margin-bottom:20px;
+            text-decoration:none;
+        "
+    >
+        ← Back to Exams
+    </a>
+
+
+
+    <!-- PAYMENT CARD -->
+
+    <section class="success-box">
+
+
+        <h2>
+            Payment Required
+        </h2>
+
+
+        <p>
+            Pay only for your selected exam.
+        </p>
+
+
+
+        <!-- SELECTED EXAM -->
+
+        <div
+            class="payment-box"
+            style="
+                margin-top:20px;
+            "
+        >
+
+            <h3 id="examTitle">
+                Loading...
+            </h3>
+
+
+            <p>
+
+                <strong>
+                    Exam Code:
+                </strong>
+
+                <span id="examCode">
+                    Loading...
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Price:
+                </strong>
+
+                <span id="examPrice">
+                    Loading...
+                </span>
+
+            </p>
+
+        </div>
+
+
+
+        <!-- PAYMENT METHODS -->
+
+        <div
+            class="payment-box"
+            style="
+                margin-top:20px;
+                text-align:left;
+            "
+        >
+
+            <h3>
+                Payment Methods
+            </h3>
+
+
+            <p>
+
+                <strong>
+                    M-Pesa:
+                </strong>
+
+                0799574155
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Account Name:
+                </strong>
+
+                Abdalla Jibrail Ahmed
+
+            </p>
+
+
+            <hr>
+
+
+            <p>
+
+                <strong>
+                    E-Birr:
+                </strong>
+
+                0995555866
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Account Name:
+                </strong>
+
+                Keyraddiin Abdella Jibraill
+
+            </p>
+
+        </div>
+
+
+
+        <!-- PAYMENT FORM -->
+
+        <form
+            id="paymentForm"
+            style="
+                margin-top:20px;
+                text-align:left;
+            "
+        >
+
+
+            <!-- PAYER NAME -->
+
+            <label
+                for="payerName"
+            >
+
+                <strong>
+                    Payer Name
+                </strong>
+
+            </label>
+
+
+            <input
+                type="text"
+                id="payerName"
+                placeholder="Enter payer name"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin-top:8px;
+                    margin-bottom:18px;
+                    box-sizing:border-box;
+                "
+            >
+
+
+
+            <!-- RECEIPT -->
+
+            <label
+                for="receipt"
+            >
+
+                <strong>
+                    Payment Receipt / Reference
+                </strong>
+
+            </label>
+
+
+            <input
+                type="text"
+                id="receipt"
+                placeholder="Enter receipt or reference"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin-top:8px;
+                    margin-bottom:18px;
+                    box-sizing:border-box;
+                "
+            >
+
+
+
+            <!-- PAYMENT METHOD -->
+
+            <label
+                for="paymentMethod"
+            >
+
+                <strong>
+                    Payment Method
+                </strong>
+
+            </label>
+
+
+            <select
+                id="paymentMethod"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin-top:8px;
+                    margin-bottom:18px;
+                    box-sizing:border-box;
+                "
+            >
+
+                <option value="">
+                    Select payment method
+                </option>
+
+                <option value="M-Pesa">
+                    M-Pesa
+                </option>
+
+                <option value="E-Birr">
+                    E-Birr
+                </option>
+
+            </select>
+
+
+
+            <!-- PAYMENT PROOF -->
+
+            <label
+                for="paymentProof"
+            >
+
+                <strong>
+                    Payment Proof
+                </strong>
+
+            </label>
+
+
+            <input
+                type="file"
+                id="paymentProof"
+                accept="image/*"
+                required
+                style="
+                    width:100%;
+                    margin-top:8px;
+                    margin-bottom:20px;
+                    box-sizing:border-box;
+                "
+            >
+
+
+
+            <!-- ERROR -->
+
+            <div
+                id="errorMessage"
+                style="
+                    display:none;
+                    background:#fee2e2;
+                    color:#b42318;
+                    padding:12px;
+                    border-radius:8px;
+                    margin-bottom:15px;
+                "
+            >
+            </div>
+
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                id="submitButton"
+                class="btn primary full-btn"
+            >
+
+                SUBMIT PAYMENT PROOF
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- STATUS -->
+
+        <div
+            id="submitStatus"
+            style="
+                display:none;
+                margin-top:20px;
+                padding:15px;
+                border-radius:8px;
+            "
+        >
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <p>
+        © 2026 KEYRADDIIN MEDIA
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   GET SELECTED EXAM
+===================================================== */
+
+const selectedExam =
+    JSON.parse(
+        localStorage.getItem(
+            "selectedExam"
+        )
+    );
+
+
+
+/* =====================================================
+   GET STUDENT
+===================================================== */
+
+const student =
+    JSON.parse(
+        localStorage.getItem(
+            "keyraddiinStudent"
+        )
+    );
+
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const examTitle =
+    document.getElementById(
+        "examTitle"
+    );
+
+
+const examCode =
+    document.getElementById(
+        "examCode"
+    );
+
+
+const examPrice =
+    document.getElementById(
+        "examPrice"
+    );
+
+
+const paymentForm =
+    document.getElementById(
+        "paymentForm"
+    );
+
+
+const payerName =
+    document.getElementById(
+        "payerName"
+    );
+
+
+const receipt =
+    document.getElementById(
+        "receipt"
+    );
+
+
+const paymentMethod =
+    document.getElementById(
+        "paymentMethod"
+    );
+
+
+const paymentProof =
+    document.getElementById(
+        "paymentProof"
+    );
+
+
+const submitButton =
+    document.getElementById(
+        "submitButton"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
+
+
+const submitStatus =
+    document.getElementById(
+        "submitStatus"
+    );
+
+
+
+/* =====================================================
+   BASIC CHECK
+===================================================== */
+
+if (!student) {
+
+    window.location.href =
+        "register.html";
+
+}
+
+
+if (!selectedExam) {
+
+    window.location.href =
+        "exams.html";
+
+}
+
+
+
+/* =====================================================
+   DISPLAY EXAM
+===================================================== */
+
+examTitle.textContent =
+    selectedExam.title;
+
+
+examCode.textContent =
+    selectedExam.examCode;
+
+
+if (
+    Number(selectedExam.price) === 0
+) {
+
+    examPrice.textContent =
+        "FREE";
+
+} else {
+
+    examPrice.textContent =
+        Number(selectedExam.price)
+        + " Birr";
+
+}
+
+
+
+/* =====================================================
+   SUBMIT PAYMENT
+===================================================== */
+
+paymentForm.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+
+        /* ---------------------------------------------
+           CLEAR OLD ERROR
+        --------------------------------------------- */
+
+        errorMessage.style.display =
+            "none";
+
+
+        errorMessage.textContent =
+            "";
+
+
+
+        /* ---------------------------------------------
+           VALUES
+        --------------------------------------------- */
+
+        const payer =
+            payerName.value.trim();
+
+
+        const receiptNumber =
+            receipt.value.trim();
+
+
+        const method =
+            paymentMethod.value;
+
+
+        const proof =
+            paymentProof.files[0];
+
+
+
+        /* ---------------------------------------------
+           VALIDATION
+        --------------------------------------------- */
+
+        if (!payer) {
+
+            showError(
+                "Please enter the payer name."
+            );
+
+            return;
+
+        }
+
+
+        if (!receiptNumber) {
+
+            showError(
+                "Please enter the payment receipt or reference."
+            );
+
+            return;
+
+        }
+
+
+        if (!method) {
+
+            showError(
+                "Please select a payment method."
+            );
+
+            return;
+
+        }
+
+
+        if (!proof) {
+
+            showError(
+                "Please upload your payment proof."
+            );
+
+            return;
+
+        }
+
+
+
+        /* ---------------------------------------------
+           CHECK IMAGE
+        --------------------------------------------- */
+
+        if (
+            !proof.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            showError(
+                "Please upload an image file."
+            );
+
+            return;
+
+        }
+
+
+
+        /* ---------------------------------------------
+           GENERATE REGISTRATION ID
+        --------------------------------------------- */
+
+        const registrationId =
+            "KRD-" +
+            Date.now()
+                .toString()
+                .slice(-8);
+
+
+
+        /* ---------------------------------------------
+           PAYMENT DATA
+        --------------------------------------------- */
+
+        const paymentData = {
+
+            registrationId:
+                registrationId,
+
+            studentName:
+                student.fullName,
+
+            grade:
+                student.grade,
+
+            school:
+                student.school,
+
+            section:
+                student.section,
+
+            examCode:
+                selectedExam.examCode,
+
+            examTitle:
+                selectedExam.title,
+
+            price:
+                selectedExam.price,
+
+            payerName:
+                payer,
+
+            receipt:
+                receiptNumber,
+
+            paymentMethod:
+                method,
+
+            paymentProofName:
+                proof.name,
+
+            status:
+                "PENDING",
+
+            submittedAt:
+                new Date().toISOString()
+
+        };
+
+
+
+        /* ---------------------------------------------
+           SAVE PAYMENT
+        --------------------------------------------- */
+
+        localStorage.setItem(
+
+            "keyraddiinPayment",
+
+            JSON.stringify(
+                paymentData
+            )
+
+        );
+
+
+
+        /* ---------------------------------------------
+           SAVE REGISTRATION DATA
+        --------------------------------------------- */
+
+        const registrationData = {
+
+            registrationId:
+                registrationId
+
+        };
+
+
+        localStorage.setItem(
+
+            "registrationData",
+
+            JSON.stringify(
+                registrationData
+            )
+
+        );
+
+
+
+        /* ---------------------------------------------
+           SHOW PROCESSING
+        --------------------------------------------- */
+
+        submitButton.disabled =
+            true;
+
+
+        submitButton.textContent =
+            "PROCESSING...";
+
+
+        submitStatus.style.display =
+            "block";
+
+
+        submitStatus.style.background =
+            "#fff7ed";
+
+
+        submitStatus.style.color =
+            "#b54708";
+
+
+        submitStatus.innerHTML = `
+
+            ⏳ Payment submitted successfully.
+
+            <br><br>
+
+            Opening confirmation...
+
+        `;
+
+
+
+        /* ---------------------------------------------
+           OPEN CONFIRMATION
+        --------------------------------------------- */
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "confirmation.html";
+
+            },
+            800
+        );
+
+
+    }
+);
+
+
+
+/* =====================================================
+   ERROR FUNCTION
+===================================================== */
+
+function showError(message) {
+
+    errorMessage.textContent =
+        message;
+
+
+    errorMessage.style.display =
+        "block";
+
+
+    window.scrollTo({
+
+        top: document.body.scrollHeight,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

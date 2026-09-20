@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Exam Confirmation</title>
+
+    <link
+        rel="stylesheet"
+        href="../style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="brand">
+
+        <h1>
+            KEYRADDIIN
+        </h1>
+
+        <p>
+            EXAM CONFIRMATION
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<main class="container">
+
+
+    <section class="success-box">
+
+
+        <div class="icon">
+            ✅
+        </div>
+
+
+        <h2>
+            Exam Access Confirmation
+        </h2>
+
+
+        <p>
+            Your exam information has been processed.
+        </p>
+
+
+
+        <!-- REGISTRATION ID -->
+
+        <div
+            class="registration-id"
+            id="registrationId"
+        >
+            Loading...
+        </div>
+
+
+
+        <!-- DETAILS -->
+
+        <div id="details"></div>
+
+
+
+        <!-- ACCESS AREA -->
+
+        <div id="actionArea"></div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    <p>
+        © 2026 KEYRADDIIN MEDIA
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   GET DATA
+===================================================== */
+
+const student =
+    JSON.parse(
+        localStorage.getItem(
+            "keyraddiinStudent"
+        )
+    );
+
+
+const selectedExam =
+    JSON.parse(
+        localStorage.getItem(
+            "selectedExam"
+        )
+    );
+
+
+const registrationData =
+    JSON.parse(
+        localStorage.getItem(
+            "registrationData"
+        )
+    );
+
+
+
+const registrationIdElement =
+    document.getElementById(
+        "registrationId"
+    );
+
+
+const details =
+    document.getElementById(
+        "details"
+    );
+
+
+const actionArea =
+    document.getElementById(
+        "actionArea"
+    );
+
+
+
+/* =====================================================
+   BASIC CHECK
+===================================================== */
+
+if (!student) {
+
+    window.location.href =
+        "register.html";
+
+}
+
+
+if (!selectedExam) {
+
+    window.location.href =
+        "exams.html";
+
+}
+
+
+
+/* =====================================================
+   REGISTRATION ID
+===================================================== */
+
+let registrationId;
+
+
+if (
+    registrationData &&
+    registrationData.registrationId
+) {
+
+    registrationId =
+        registrationData.registrationId;
+
+} else {
+
+    registrationId =
+        "KRD-" +
+        Date.now()
+            .toString()
+            .slice(-8);
+
+}
+
+
+
+registrationIdElement.textContent =
+    registrationId;
+
+
+
+/* =====================================================
+   EXAM ACCESS KEY
+===================================================== */
+
+const accessKey =
+    "examAccess_" +
+    selectedExam.examCode;
+
+
+const accessStatus =
+    localStorage.getItem(
+        accessKey
+    );
+
+
+
+/* =====================================================
+   STUDENT + EXAM DETAILS
+===================================================== */
+
+details.innerHTML = `
+
+    <div class="payment-box">
+
+        <p>
+            <strong>Student:</strong>
+            ${student.fullName}
+        </p>
+
+
+        <p>
+            <strong>Grade:</strong>
+            ${student.grade}
+        </p>
+
+
+        <p>
+            <strong>School:</strong>
+            ${student.school}
+        </p>
+
+
+        <p>
+            <strong>Section:</strong>
+            ${student.section}
+        </p>
+
+
+        <hr>
+
+
+        <p>
+            <strong>Exam:</strong>
+            ${selectedExam.title}
+        </p>
+
+
+        <p>
+            <strong>Exam Code:</strong>
+            ${selectedExam.examCode}
+        </p>
+
+
+        <p>
+            <strong>Price:</strong>
+            ${
+                Number(selectedExam.price) === 0
+                ? "FREE"
+                : selectedExam.price + " Birr"
+            }
+        </p>
+
+    </div>
+
+`;
+
+
+
+/* =====================================================
+   START EXAM FUNCTION
+===================================================== */
+
+function showStartExam() {
+
+    actionArea.innerHTML = `
+
+        <div
+            class="payment-box"
+            style="
+                background:#ecfdf3;
+                color:#087443;
+            "
+        >
+
+            <h3>
+                ✓ ACCESS GRANTED
+            </h3>
+
+
+            <p>
+                Your payment has been approved.
+            </p>
+
+
+            <p>
+                You can start this exam now.
+            </p>
+
+        </div>
+
+
+        <a
+            href="https://keyraddiin18-prog.github.io/KEYRADDIIN-EXAM-CENTER-SECOND-BRANCH/"
+            class="btn primary full-btn"
+        >
+            🚀 START EXAM
+        </a>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   FREE EXAM
+===================================================== */
+
+if (
+    Number(selectedExam.price) === 0
+) {
+
+
+    localStorage.setItem(
+        accessKey,
+        "granted"
+    );
+
+
+    showStartExam();
+
+}
+
+
+
+/* =====================================================
+   PAID EXAM — ALREADY GRANTED
+===================================================== */
+
+else if (
+    accessStatus === "granted"
+) {
+
+    showStartExam();
+
+}
+
+
+
+/* =====================================================
+   PAID EXAM — 30 SECOND PENDING
+===================================================== */
+
+else {
+
+
+    let seconds = 30;
+
+
+    actionArea.innerHTML = `
+
+        <div
+            class="payment-box"
+            style="
+                background:#fff7ed;
+                color:#b54708;
+            "
+        >
+
+            <h3>
+                ⏳ PAYMENT SUBMITTED
+            </h3>
+
+
+            <p>
+                Your payment is being processed.
+            </p>
+
+
+            <p>
+                Please wait...
+            </p>
+
+
+            <h2
+                id="countdown"
+                style="
+                    font-size:32px;
+                    margin:15px 0;
+                "
+            >
+                30
+            </h2>
+
+
+            <p>
+                Access will be granted automatically.
+            </p>
+
+
+            <p>
+                Registration ID:
+                <strong>
+                    ${registrationId}
+                </strong>
+            </p>
+
+        </div>
+
+    `;
+
+
+    const countdown =
+        document.getElementById(
+            "countdown"
+        );
+
+
+    const timer =
+        setInterval(function () {
+
+
+            seconds--;
+
+
+            if (countdown) {
+
+                countdown.textContent =
+                    seconds;
+
+            }
+
+
+            if (seconds <= 0) {
+
+                clearInterval(timer);
+
+
+                /* ---------------------------------
+                   AUTOMATIC APPROVAL
+                --------------------------------- */
+
+                localStorage.setItem(
+                    accessKey,
+                    "granted"
+                );
+
+
+                showStartExam();
+
+            }
+
+
+        }, 1000);
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
