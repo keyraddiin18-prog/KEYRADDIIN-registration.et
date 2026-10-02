@@ -174,7 +174,7 @@ const exams = [
     },
 
     // =====================================================
-    // NEW EXAMS — TODAY
+    // PREVIOUSLY ADDED EXAMS
     // =====================================================
 
     {
@@ -210,6 +210,46 @@ const exams = [
         subject: "Physics",
         unit: "Unit 1 – Vectors",
         title: "Grade 10 Physics Unit 1 – Vectors",
+        price: 0
+    },
+
+    // =====================================================
+    // QORMAATA HAR'AA — HUNDI FREE
+    // =====================================================
+
+    {
+        examCode: "G10-ECO-2S-2026",
+        grade: "10",
+        subject: "Economics",
+        unit: "Unit 1",
+        title: "Grade 10 Economics — Unit 1 — 2026 E.C.",
+        price: 0
+    },
+
+    {
+        examCode: "G10-PHY-U1-2026",
+        grade: "10",
+        subject: "Physics",
+        unit: "Unit 1 — Vector Quantities",
+        title: "Grade 10 Physics Unit 1 — Vector Quantities",
+        price: 0
+    },
+
+    {
+        examCode: "G7-GS-U1-2017",
+        grade: "7",
+        subject: "General Science",
+        unit: "Unit 1",
+        title: "Kutaa 7ffaa Saayinsii Waliigalaa — Bara 2017 E.C.",
+        price: 0
+    },
+
+    {
+        examCode: "G8-HAWAASA-S1-2026",
+        grade: "8",
+        subject: "Hawaasa",
+        unit: "Semester 1ffaa",
+        title: "Kutaa 8ffaa Hawaasa — Semester 1ffaa — Bara 2018 E.C.",
         price: 0
     }
 
