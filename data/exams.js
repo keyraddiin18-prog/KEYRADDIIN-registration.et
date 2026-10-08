@@ -214,7 +214,7 @@ const exams = [
     },
 
     // =====================================================
-    // QORMAATA HAR'AA — HUNDI FREE
+    // QORMAATA HAR'AA — HAARAA
     // =====================================================
 
     {
@@ -232,6 +232,24 @@ const exams = [
         subject: "Physics",
         unit: "Unit 1 — Vector Quantities",
         title: "Grade 10 Physics Unit 1 — Vector Quantities",
+        price: 0
+    },
+
+    {
+        examCode: "G10-CHEM-U9-2026",
+        grade: "10",
+        subject: "Chemistry",
+        unit: "Unit 1 — Mock Exam Form UEE",
+        title: "Grade 10 Chemistry Unit 1 — Mock Exam Form UEE",
+        price: 10
+    },
+
+    {
+        examCode: "G10-BIO-U9-2026",
+        grade: "10",
+        subject: "Biology",
+        unit: "Unit 1 — Sub-fields of Biology",
+        title: "Grade 10 Biology Unit 1 — Second Exam",
         price: 0
     },
 
